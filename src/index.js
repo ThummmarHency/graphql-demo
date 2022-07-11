@@ -1,37 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
+import { React } from "react";
+import * as ReactDOM from "react-dom/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  gql,
-} from "@apollo/client";
-
+import "./index.css";
 const client = new ApolloClient({
-  url: "http://localhost:4000/graphql",
+  uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
-client
-  .query({
-    query: gql`
-      query GetLocations {
-        books {
-          id
-          name
-        }
-      }
-    `,
-  })
-  .then((result) => console.log("result", result));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </ApolloProvider>
 );
 

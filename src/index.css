@@ -12,3 +12,84 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#main {
+  padding: 0px;
+  box-sizing: border-box;
+  width: 60%;
+  height: 100%;
+}
+
+#main h1 {
+  color: #444;
+  text-align: center;
+}
+
+#book_list {
+  padding: 0;
+}
+
+#book_list li {
+  display: inline-block;
+  margin: 12px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #880e4f;
+  color: #880e4f;
+  cursor: pointer;
+}
+form {
+  background: #fff;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 400px;
+}
+
+form .field {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+form label {
+  padding: 6px;
+  text-align: right;
+}
+
+form select,
+form input {
+  margin: 4px;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+form .btn {
+  color: #fff;
+  font-size: 2rem;
+  background: #ad1457;
+  border: 0;
+  padding: 0 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.book_detail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: #ad1457;
+  padding: 30px;
+  overflow: auto;
+  box-shadow: -2px -3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: border-box;
+  color: #fff;
+}
+.book_detail li {
+  color: #fff;
+}
