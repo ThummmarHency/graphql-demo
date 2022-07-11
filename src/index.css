@@ -56,6 +56,7 @@ form .field {
 form label {
   padding: 6px;
   text-align: right;
+  background: #bb759a;
 }
 
 form select,
@@ -83,7 +84,7 @@ form .btn {
   right: 0;
   width: 40%;
   height: 100%;
-  background: #ad1457;
+  background: #80144d;
   padding: 30px;
   overflow: auto;
   box-shadow: -2px -3px 5px rgba(0, 0, 0, 0.3);

@@ -1,4 +1,14 @@
 import { gql } from "@apollo/client";
+const GET_LOCATIONS = gql`
+  {
+    locations {
+      name
+      id
+      photo
+    }
+  }
+`;
+
 const getAuthorList = gql`
   {
     authors {
@@ -8,40 +18,26 @@ const getAuthorList = gql`
   }
 `;
 
-const getBookList = gql`
-  {
-    books {
-      name
-      id
+const ADD_REVIEW = gql`
+  mutation Mutation($locationReview: LocationReviewInput) {
+    submitReview(locationReview: $locationReview) {
+      message
     }
   }
 `;
 
-const addBookMutation = gql`
-  mutation ($name: String!, $gerne: String!, $authorId: ID!) {
-    addBook(name: $name, gerne: $gerne, authorId: $authorId) {
+const LOCATION_DETAIL = gql`
+  query ($id: ID!) {
+    location(id: $id) {
       name
-      id
-    }
-  }
-`;
-
-const bookDetailList = gql`
-  query ($id: ID) {
-    book(id: $id) {
-      id
-      name
-      gerne
-      author {
+      photo
+      description
+      reviewsForLocation {
         id
-        name
-        age
-        books {
-          name
-          id
-        }
+        comment
+        rating
       }
     }
   }
 `;
-export { getBookList, getAuthorList, addBookMutation, bookDetailList };
+export { GET_LOCATIONS, getAuthorList, ADD_REVIEW, LOCATION_DETAIL };

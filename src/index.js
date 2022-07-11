@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://flyby-gateway.herokuapp.com/",
   cache: new InMemoryCache(),
 });
 const root = ReactDOM.createRoot(document.getElementById("root"));
