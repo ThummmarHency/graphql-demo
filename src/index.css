@@ -78,6 +78,15 @@ form .btn {
   bottom: 10px;
   left: 10px;
 }
+form .update_btn {
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 10%;
+  background: #ad1457;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+}
 .book_detail {
   position: fixed;
   top: 0;

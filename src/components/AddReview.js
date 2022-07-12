@@ -1,31 +1,38 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import {
   ADD_REVIEW,
-  getAuthorList,
   GET_LOCATIONS,
   LOCATION_DETAIL,
 } from "../query-component/Queries";
 
 // import { graphql } from "react-apollo";
 
-const AddReview = ({ locationId }) => {
+const AddReview = ({ locationId, locationData }) => {
+  console.log("locationData :>> ", locationData);
   const [locationDetail, setlocationDetail] = useState({
     comment: "",
     rating: "",
     locationId: locationId,
   });
-  const [addReview, { data1, loading1, error1 }] = useMutation(ADD_REVIEW);
-  const { loading, error, data } = useQuery(getAuthorList);
-  if (loading) return <p>Loading...</p>;
-  console.log("data1 :>> ", data1);
+  useEffect(() => {
+    locationData &&
+      setlocationDetail({
+        comment: locationData?.comment,
+        rating: locationData?.rating,
+        locationId: "rev-9",
+      });
+  }, [locationData]);
+
+  const [addReview] = useMutation(ADD_REVIEW);
+
   const getlocationDetail = (e) => {
     e.preventDefault();
     if (!locationDetail?.comment.length) {
       alert("Comment field required");
       return;
     }
-    if (!locationDetail?.rating.length) {
+    if (!locationDetail?.rating) {
       alert("rating field required");
       return;
     }
@@ -33,7 +40,7 @@ const AddReview = ({ locationId }) => {
       variables: {
         locationReview: {
           comment: locationDetail?.comment,
-          rating: 4,
+          rating: parseInt(locationDetail?.rating),
           locationId: locationId,
         },
       },
@@ -48,11 +55,12 @@ const AddReview = ({ locationId }) => {
         },
       ],
     });
-    setlocationDetail({
-      comment: "",
-      rating: "",
-      locationId: "",
-    });
+    locationData?.id &&
+      setlocationDetail({
+        comment: "",
+        rating: "",
+        locationId: "",
+      });
     console.log("locationDetail", locationDetail);
   };
   const rating = [1, 2, 3, 4, 5];
@@ -80,6 +88,7 @@ const AddReview = ({ locationId }) => {
               });
             }}
             value={locationDetail?.rating}
+            // value={locationDetail?.rating}
           >
             <option value="">Select review</option>
             {rating?.map((rate, index) => {
@@ -95,8 +104,17 @@ const AddReview = ({ locationId }) => {
           <label>locationId : </label>
           <input type="text" value={locationId} disabled={!!locationId} />
         </div>
-
-        <button className="btn">+</button>
+        {/* {locationData?.id && (
+          <div className="field">
+            <label>ReviewId : </label>
+            <input
+              type="text"
+              value={locationData?.id}
+              disabled={!!locationData?.id}
+            />
+          </div>
+        )} */}
+        <button className={"btn"}>+</button>
       </form>
     </div>
   );

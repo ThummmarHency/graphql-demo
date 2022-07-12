@@ -1,12 +1,14 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+import React, { useState } from "react";
 import { LOCATION_DETAIL } from "../query-component/Queries";
 import AddReview from "./AddReview";
 const BookDetail = ({ locationId }) => {
+  const [cmtdata, setCmtdata] = useState({});
   const { data, loading, error } = useQuery(LOCATION_DETAIL, {
     variables: {
       id: locationId,
     },
+    // fetchPolicy: "network-only",
   });
 
   console.log("data1", data);
@@ -15,8 +17,8 @@ const BookDetail = ({ locationId }) => {
       <div className="book_detail">
         {!loading ? (
           <>
-            <AddReview locationId={locationId} />
-
+            <AddReview locationId={locationId} locationData={cmtdata} />
+            {/* <button className="add_cmt_btn">Add comment</button> */}
             <h2>{data?.location?.name}</h2>
             <ul>
               <img
@@ -36,6 +38,9 @@ const BookDetail = ({ locationId }) => {
                       return (
                         <>
                           <li key={review?.id}>{review?.comment}</li>
+                          <button onClick={() => setCmtdata(review)}>
+                            Edit
+                          </button>
                         </>
                       );
                     })}
